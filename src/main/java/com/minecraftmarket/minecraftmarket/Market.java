@@ -133,7 +133,7 @@ public class Market extends JavaPlugin {
 	}
 
 	private void startSignTasks() {
-		if (isSignEnabled()) {
+		if (isSignEnabled) {
 			Signs.getSigns().setup();
 			signUpdate = new SignUpdate();
 			signUpdate.startSignTask();
