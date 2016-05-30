@@ -25,10 +25,6 @@ public class ShopCategory {
 		return ID;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public int getSlot() {
 		return slot;
 	}

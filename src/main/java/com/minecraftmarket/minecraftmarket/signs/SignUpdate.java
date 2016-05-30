@@ -27,14 +27,4 @@ public class SignUpdate extends BukkitRunnable {
 		Signs.getSigns().updateJson();
 		SignData.updateAllSigns();
 	}
-	
-	public class SignJson extends BukkitRunnable {
-
-		@Override
-		public void run() {
-			
-		}
-		
-		
-	}
 }

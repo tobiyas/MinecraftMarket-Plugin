@@ -18,12 +18,4 @@ public class RecentGUI {
 		task.runTaskAsynchronously(Market.getPlugin());
 		player.openInventory(inv);
 	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public Inventory getInv() {
-		return inv;
-	}
 }

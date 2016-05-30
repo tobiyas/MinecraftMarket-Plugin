@@ -58,16 +58,8 @@ public class ShopPackage {
 
 	}
 
-	public void remove() {
-		packages.remove(this);
-	}
-
 	public static void removeAll() {
 		packages.clear();
-	}
-
-	public static List<ShopPackage> getCategories() {
-		return packages;
 	}
 
 	private void createLore() {
@@ -127,14 +119,6 @@ public class ShopPackage {
 		return null;
 	}
 
-	public static List<ShopPackage> getPackages() {
-		return packages;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public ItemStack getItem() {
 		return icon;
 	}
@@ -145,22 +129,6 @@ public class ShopPackage {
 
 	public int getId() {
 		return id;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public Material getMaterial() {
-		return material;
-	}
-
-	public ItemMeta getMeta() {
-		return meta;
 	}
 
 }

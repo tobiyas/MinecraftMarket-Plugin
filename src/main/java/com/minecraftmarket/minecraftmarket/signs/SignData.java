@@ -57,33 +57,27 @@ public class SignData {
 		}
 	}
 
-	public Sign getSign() {
-		return this.sign;
-	}
-
 	public void update() throws JSONException {
 		this.username = Signs.getJsonArray().getJSONObject(number).getString("username");
 		this.item = Signs.getJsonArray().getJSONObject(number).getString("item");
 		this.date = Signs.getJsonArray().getJSONObject(number).getString("date");
 		this.date = date.split(" ")[0];
 
-		sign.setLine(0, ChatColor.UNDERLINE + getMsg("signs.header"));
-		sign.setLine(1, username);
-		sign.setLine(2, item);
-		sign.setLine(3, date);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable(){
-			public void run(){
-				sign.update();
-				//Just encase
-				sign.update(true, true);
-			}
-		}, 20L);
-		updateHead();
-	}
+		if(sign != null) {
 
-	public void notFound() {
-		sign.setLine(1, ChatColor.DARK_RED + "Not Found.");
-		sign.update();
+			sign.setLine(0, ChatColor.UNDERLINE + getMsg("signs.header"));
+			sign.setLine(1, username);
+			sign.setLine(2, item);
+			sign.setLine(3, date);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable() {
+				public void run() {
+					sign.update();
+					//Just encase
+					sign.update(true, true);
+				}
+			}, 20L);
+			updateHead();
+		}
 	}
 
 	public boolean isSign() {
@@ -115,9 +109,10 @@ public class SignData {
 	}
 
 	public static void updateAllSigns() {
-		List<SignData> toRemove = Lists.newArrayList();
-		for (SignData sd : signs) {
-			//if(sd.getLocation().getBlock().getType() == Material.SIGN || sd.getLocation().getBlock().getType() == Material.WALL_SIGN){
+		try {
+			List<SignData> toRemove = Lists.newArrayList();
+			for (SignData sd : signs) {
+				//if(sd.getLocation().getBlock().getType() == Material.SIGN || sd.getLocation().getBlock().getType() == Material.WALL_SIGN){
 				if (sd.isSign()) {
 					try {
 						sd.update();
@@ -126,24 +121,18 @@ public class SignData {
 				} else {
 					toRemove.add(sd);
 				}
-			/*}else{
-				Bukkit.broadcastMessage(Chat.get().prefix + "Found invalid sign! Removing!");
-				sd.getLocation().getBlock().setType(Material.AIR);
-				toRemove.add(sd);
-			}*/
+				/*}else{
+					Bukkit.broadcastMessage(Chat.get().prefix + "Found invalid sign! Removing!");
+					sd.getLocation().getBlock().setType(Material.AIR);
+					toRemove.add(sd);
+				}*/
+			}
+			for (SignData sd : toRemove) {
+				sd.remove();
+			}
+		} catch (NullPointerException e) {
+			Market.getPlugin().getLogger().info("Report to maeyrlotg@gmail.com that plugin was not able to update all signs.");
 		}
-		for (SignData sd : toRemove) {
-			sd.remove();
-		}
-	}
-
-	public Location convertLocation(String str) {
-		String[] args = str.split(":");
-		World world = Bukkit.getServer().getWorld(args[0]);
-		double x = convertDouble(args[1]);
-		double y = convertDouble(args[2]);
-		double z = convertDouble(args[3]);
-		return new Location(world, x, y, z);
 	}
 
 	public static SignData getSignByLocation(Location location) {
@@ -155,32 +144,12 @@ public class SignData {
 		return null;
 	}
 
-	public Integer getPlace() {
-		return this.number;
-	}
-
-	public String getDate() {
-		return this.date;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public String getItem() {
-		return this.item;
-	}
-
 	public Location getLocation() {
 		return this.location;
 	}
 
 	public Integer getNumber() {
 		return this.number;
-	}
-
-	private Double convertDouble(String str) {
-		return Double.parseDouble(str);
 	}
 
 	private Skull getSkull(Block block) {

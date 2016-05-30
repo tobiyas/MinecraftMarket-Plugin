@@ -66,8 +66,4 @@ public class Api {
 			return false;
 		}
 	}
-
-	public static boolean isAuth() {
-		return auth;
-	}
 }

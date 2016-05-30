@@ -37,10 +37,6 @@ public class PendingCommands {
 		return id;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
 	public boolean isOnline() {
 		return online;
 	}

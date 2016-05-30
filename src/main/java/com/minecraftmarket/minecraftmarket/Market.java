@@ -11,10 +11,10 @@ import com.minecraftmarket.minecraftmarket.signs.Signs;
 import com.minecraftmarket.minecraftmarket.util.Chat;
 import com.minecraftmarket.minecraftmarket.util.Log;
 import com.minecraftmarket.minecraftmarket.util.Settings;
+import com.minecraftmarket.minecraftmarket.gravitydevelopment.Updater;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.gravitydevelopment.updater.Updater;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -54,6 +54,7 @@ public class Market extends JavaPlugin {
 	public void onEnable() {
         plugin = this;
 		try {
+			ExceptionLogging el = new ExceptionLogging() {};
 			registerCommands();
 			saveDefaultSettings();
 			registerEvents();
@@ -160,9 +161,5 @@ public class Market extends JavaPlugin {
 			Log.log(e);
 		}
 	}
-
-    public File getPluginFile() {
-        return this.getFile();
-    }
     
 }
