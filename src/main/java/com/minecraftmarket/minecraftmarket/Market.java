@@ -16,11 +16,12 @@ import com.minecraftmarket.minecraftmarket.gravitydevelopment.Updater;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
 
-import java.io.File;
+import java.beans.ExceptionListener;
 import java.io.IOException;
 
 public class Market extends JavaPlugin {
@@ -54,7 +55,12 @@ public class Market extends JavaPlugin {
 	public void onEnable() {
         plugin = this;
 		try {
-			ExceptionLogging el = new ExceptionLogging() {};
+			ExceptionListener el = new ExceptionListener() {
+				@Override
+				public void exceptionThrown(Exception e) {
+					Bukkit.broadcastMessage(e.getMessage());
+				}
+			};
 			registerCommands();
 			saveDefaultSettings();
 			registerEvents();
