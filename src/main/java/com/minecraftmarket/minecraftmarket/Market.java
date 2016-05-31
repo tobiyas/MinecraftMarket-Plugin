@@ -1,6 +1,7 @@
 package com.minecraftmarket.minecraftmarket;
 
 import com.minecraftmarket.minecraftmarket.command.CommandTask;
+import com.minecraftmarket.minecraftmarket.gravitydevelopment.Updater;
 import com.minecraftmarket.minecraftmarket.mcommands.Commands;
 import com.minecraftmarket.minecraftmarket.recentgui.RecentListener;
 import com.minecraftmarket.minecraftmarket.shop.ShopListener;
@@ -11,11 +12,8 @@ import com.minecraftmarket.minecraftmarket.signs.Signs;
 import com.minecraftmarket.minecraftmarket.util.Chat;
 import com.minecraftmarket.minecraftmarket.util.Log;
 import com.minecraftmarket.minecraftmarket.util.Settings;
-import com.minecraftmarket.minecraftmarket.gravitydevelopment.Updater;
-
 import lombok.Getter;
 import lombok.Setter;
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -56,10 +54,12 @@ public class Market extends JavaPlugin {
         plugin = this;
 		try {
 			ExceptionListener el = new ExceptionListener() {
+
 				@Override
 				public void exceptionThrown(Exception e) {
 					Bukkit.broadcastMessage(e.getMessage());
 				}
+
 			};
 			registerCommands();
 			saveDefaultSettings();
