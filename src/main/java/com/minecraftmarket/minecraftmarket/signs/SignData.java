@@ -9,7 +9,6 @@ import com.minecraftmarket.minecraftmarket.util.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
@@ -58,25 +57,36 @@ public class SignData {
 	}
 
 	public void update() throws JSONException {
-		this.username = Signs.getJsonArray().getJSONObject(number).getString("username");
-		this.item = Signs.getJsonArray().getJSONObject(number).getString("item");
-		this.date = Signs.getJsonArray().getJSONObject(number).getString("date");
-		this.date = date.split(" ")[0];
+		try {
+			this.username = Signs.getJsonArray().getJSONObject(number).getString("username");
+			this.item = Signs.getJsonArray().getJSONObject(number).getString("item");
+			this.date = Signs.getJsonArray().getJSONObject(number).getString("date");
+			this.date = date.split(" ")[0];
 
-		if(sign != null) {
+			if (sign != null) {
 
-			sign.setLine(0, ChatColor.UNDERLINE + getMsg("signs.header"));
-			sign.setLine(1, username);
-			sign.setLine(2, item);
-			sign.setLine(3, date);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable() {
-				public void run() {
-					sign.update();
-					//Just encase
-					sign.update(true, true);
-				}
-			}, 20L);
-			updateHead();
+				sign.setLine(0, ChatColor.UNDERLINE + getMsg("signs.header"));
+				sign.setLine(1, username);
+				sign.setLine(2, item);
+				sign.setLine(3, date);
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable() {
+					public void run() {
+						sign.update();
+						//Just encase
+						sign.update(true, true);
+					}
+				}, 20L);
+				updateHead();
+			}
+		} catch (JSONException e) {
+			sign.setLine(0, ChatColor.RED + "Awaiting purchase");
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable() {
+                public void run() {
+                    sign.update();
+                    //Just encase
+                    sign.update(true, true);
+                }
+            }, 20L);
 		}
 	}
 
