@@ -5,7 +5,6 @@ import com.minecraftmarket.minecraftmarket.Market;
 import com.minecraftmarket.minecraftmarket.json.JSONException;
 import com.minecraftmarket.minecraftmarket.util.Chat;
 import com.minecraftmarket.minecraftmarket.util.Settings;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -63,6 +62,8 @@ public class SignData {
 			this.date = Signs.getJsonArray().getJSONObject(number).getString("date");
 			this.date = date.split(" ")[0];
 
+            Bukkit.broadcastMessage("Found purchase of " + item + " from " + username + " on " + date);
+
 			if (sign != null) {
 
 				sign.setLine(0, ChatColor.UNDERLINE + getMsg("signs.header"));
@@ -79,7 +80,13 @@ public class SignData {
 				updateHead();
 			}
 		} catch (JSONException e) {
-			sign.setLine(0, ChatColor.RED + "Awaiting purchase");
+
+            Bukkit.broadcastMessage("Awaiting Purchase: " + Market.getAwaitingPurchase());
+
+            sign.setLine(0, ChatColor.RED + Market.getAwaitingPurchase());
+            sign.setLine(1, "");
+            sign.setLine(2, "");
+            sign.setLine(3, "");
             Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable() {
                 public void run() {
                     sign.update();
@@ -87,8 +94,10 @@ public class SignData {
                     sign.update(true, true);
                 }
             }, 20L);
-		}
-	}
+            Skull p = getSkull(block);
+            p.setOwner(Market.getHeadName());
+        }
+    }
 
 	public boolean isSign() {
 		return this.block.getState() instanceof Sign;
@@ -141,7 +150,6 @@ public class SignData {
 				sd.remove();
 			}
 		} catch (NullPointerException e) {
-			Market.getPlugin().getLogger().info("Report to maeyrlotg@gmail.com that plugin was not able to update all signs.");
 		}
 	}
 

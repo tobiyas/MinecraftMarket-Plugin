@@ -1,5 +1,8 @@
 package com.minecraftmarket.minecraftmarket.signs;
 
+import com.minecraftmarket.minecraftmarket.Market;
+import com.minecraftmarket.minecraftmarket.json.JSONException;
+import com.minecraftmarket.minecraftmarket.util.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -8,10 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
-
-import com.minecraftmarket.minecraftmarket.Market;
-import com.minecraftmarket.minecraftmarket.json.JSONException;
-import com.minecraftmarket.minecraftmarket.util.Chat;
 
 public class SignListener implements Listener {
 
@@ -52,21 +51,15 @@ public class SignListener implements Listener {
 
 			SignData signData = null;
 
+
+			signData = new SignData(loc, id - 1);
+
 			try {
-				if(Signs.getJsonArray().getJSONObject(id-1) != null){
-					signData = new SignData(loc, id - 1);
-					
-					try {
-						signData.update();
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-					event.getPlayer().sendMessage(chat.prefix + ChatColor.GREEN + Chat.get().getLanguage().getString(("signs.created")));
-				}
-			} catch (JSONException e1) {
-				event.getBlock().setType(Material.AIR);
-				event.getPlayer().sendMessage(chat.prefix + ChatColor.DARK_RED + "Invalid sign format! Couldn't find any purchases with id specified!");
+				signData.update();
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
+			event.getPlayer().sendMessage(chat.prefix + ChatColor.GREEN + Chat.get().getLanguage().getString(("signs.created")));
 
 		}
 

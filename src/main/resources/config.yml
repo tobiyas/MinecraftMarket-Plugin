@@ -28,9 +28,16 @@ Shop-Command: /shop
 #This will update MinecraftMarket, highly recommended to keep you updated
 auto-update: true
 
+#Categories GUI title color
+Color: '&0'
+
+#Default Player Skull for the Awaiting Purchases Signs
+HeadName: 'Steve'
+
+#Default sign message for awaiting purchases
+AwaitingPurchase: '&cAwaiting Purchase'
 
 # Enable/Disable Debugging mode
 Debug: false
 
-#Categories GUI title color
-Color: '&0'
+

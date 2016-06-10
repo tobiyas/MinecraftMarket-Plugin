@@ -12,8 +12,6 @@ import com.minecraftmarket.minecraftmarket.signs.Signs;
 import com.minecraftmarket.minecraftmarket.util.Chat;
 import com.minecraftmarket.minecraftmarket.util.Log;
 import com.minecraftmarket.minecraftmarket.util.Settings;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,26 +21,21 @@ import java.beans.ExceptionListener;
 import java.io.IOException;
 
 public class Market extends JavaPlugin {
-	
-    @Getter @Setter
-	private Long interval;
-    @Getter @Setter
-	private String shopCommand;
-	private boolean update;
-    @Getter @Setter
-	private boolean isBoardEnabled;
-    @Getter @Setter
-	private boolean isSignEnabled;
-    @Getter @Setter
-	private boolean isGuiEnabled;
-    @Getter @Setter
-	private static Market plugin;
-    @Getter @Setter
-	private CommandTask commandTask;
-    @Getter @Setter
-	private SignUpdate signUpdate;
-    @Getter @Setter
-    private String color;
+
+    private static Long interval;
+    private static String shopCommand;
+    private static boolean update;
+    private static boolean isBoardEnabled;
+    private static boolean isSignEnabled;
+    private static boolean isGuiEnabled;
+    private static Market plugin;
+    private static CommandTask commandTask;
+    private static SignUpdate signUpdate;
+    private static String color;
+
+    private static String headName;
+
+    private static String awaitingPurchase;
 
 	@Override
 	public void onDisable() {
@@ -99,8 +92,10 @@ public class Market extends JavaPlugin {
 		this.update = config.getBoolean("auto-update", true);
 		this.isSignEnabled = config.getBoolean("Enabled-signs", true);
         this.color = config.getString("Color", "&0");
-		Log.setDebugging(config.getBoolean("Debug", false));
-	}
+        this.headName = config.getString("HeadName", "Steve");
+        this.awaitingPurchase = config.getString("AwaitingPurchase", "&cAwaiting Purchase");
+        Log.setDebugging(config.getBoolean("Debug", false));
+    }
 
 	private void registerEvents() {
 		getServer().getPluginManager().registerEvents(new ShopListener(), this);
@@ -167,5 +162,49 @@ public class Market extends JavaPlugin {
 			Log.log(e);
 		}
 	}
+
+    public static Market getPlugin() {
+        return plugin;
+    }
+
+    public static String getHeadName() {
+        return headName;
+    }
+
+    public static String getAwaitingPurchase() {
+        return awaitingPurchase;
+    }
+
+    public String getShopCommand() {
+        return shopCommand;
+    }
+
+    public boolean getIsBoardEnabled() {
+        return isBoardEnabled;
+    }
+
+    public boolean getIsSignEnabled() {
+        return isSignEnabled;
+    }
+
+    public boolean getIsGuiEnabled() {
+        return isGuiEnabled;
+    }
+
+    public CommandTask getCommandTask() {
+        return commandTask;
+    }
+
+    public Long getInterval() {
+        return interval;
+    }
+
+    public SignUpdate getSignUpdate() {
+        return signUpdate;
+    }
+
+    public String getColor() {
+        return color;
+    }
     
 }
