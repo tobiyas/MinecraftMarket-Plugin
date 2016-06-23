@@ -187,7 +187,7 @@ public class Market extends JavaPlugin {
         return isSignEnabled;
     }
 
-    public boolean getIsGuiEnabled() {
+    public boolean isGuiEnabled() {
         return isGuiEnabled;
     }
 
@@ -206,5 +206,5 @@ public class Market extends JavaPlugin {
     public String getColor() {
         return color;
     }
-    
+
 }
