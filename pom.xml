@@ -33,7 +33,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>main/resources</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
