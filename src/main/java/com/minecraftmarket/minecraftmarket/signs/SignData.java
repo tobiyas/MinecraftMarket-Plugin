@@ -83,8 +83,8 @@ public class SignData {
 
             Bukkit.broadcastMessage("Awaiting Purchase: " + Market.getAwaitingPurchase());
 
-            sign.setLine(0, ChatColor.RED + Market.getAwaitingPurchase());
-            sign.setLine(1, "");
+			sign.setLine(0, Market.getAwaitingPurchase());
+			sign.setLine(1, "");
             sign.setLine(2, "");
             sign.setLine(3, "");
             Bukkit.getScheduler().scheduleSyncDelayedTask(Market.getPlugin(), new Runnable() {
