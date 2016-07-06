@@ -98,7 +98,7 @@ public class CommandExecutor extends BukkitRunnable {
 		}
 		executed();
 		Log.debug("Command \"/" + command + "\" will be executed in " + delay + " seconds");
-		this.runTaskLaterAsynchronously(Market.getPlugin(), delay * 20);
+		this.runTaskLater(Market.getPlugin(), delay * 20);
 	}
 
 	public void setPending() {
