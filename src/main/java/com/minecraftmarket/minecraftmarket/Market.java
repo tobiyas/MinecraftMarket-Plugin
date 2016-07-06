@@ -84,15 +84,17 @@ public class Market extends JavaPlugin {
 	private void loadConfigOptions() {
 		Chat.get().SetupDefaultLanguage();
         FileConfiguration config = this.getConfig();
+        
         Api.setApi(config.getString("ApiKey", "Apikey here"));
-		this.interval = Math.max(config.getLong("Interval", 90L), 10L);
-		this.isGuiEnabled = config.getBoolean("Enabled-GUI", true);
-		this.shopCommand = config.getString("Shop-Command", "/shop");
-		this.update = config.getBoolean("auto-update", true);
-		this.isSignEnabled = config.getBoolean("Enabled-signs", true);
-        this.color = config.getString("Color", "&0");
-        this.headName = config.getString("HeadName", "Steve");
-        this.awaitingPurchase = config.getString("AwaitingPurchase", "&cAwaiting Purchase");
+		interval = Math.max(config.getLong("Interval", 90L), 10L);
+		isGuiEnabled = config.getBoolean("Enabled-GUI", true);
+		shopCommand = config.getString("Shop-Command", "/shop");
+		update = config.getBoolean("auto-update", true);
+		isSignEnabled = config.getBoolean("Enabled-signs", true);
+        color = config.getString("Color", "&0");
+        headName = config.getString("HeadName", "Steve");
+        awaitingPurchase = config.getString("AwaitingPurchase", "&cAwaiting Purchase");
+        
         Log.setDebugging(config.getBoolean("Debug", false));
     }
 
