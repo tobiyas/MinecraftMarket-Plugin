@@ -47,13 +47,12 @@ public class Market extends JavaPlugin {
         plugin = this;
 		try {
 			ExceptionListener el = new ExceptionListener() {
-
 				@Override
 				public void exceptionThrown(Exception e) {
 					Bukkit.broadcastMessage(e.getMessage());
 				}
-
 			};
+			
 			registerCommands();
 			saveDefaultSettings();
 			registerEvents();
@@ -115,11 +114,13 @@ public class Market extends JavaPlugin {
 	}
 
 	private void startMetrics() {
-		try {
-			MetricsLite metrics = new MetricsLite(this);
-			metrics.start();
-		} catch (IOException e) {
-			Log.log(e);
+		if(getConfig().getBoolean("enableMetrics", true)){
+			try {
+				MetricsLite metrics = new MetricsLite(this);
+				metrics.start();
+			} catch (IOException e) {
+				Log.log(e);
+			}
 		}
 	}
 

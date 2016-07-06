@@ -45,3 +45,7 @@ AwaitingPurchase: '&cAwaiting Purchase'
 Debug: false
 
 
+#If Metrics statistics are sent to the server (mcstats.mc) .
+enableMetrics: true
+
+
